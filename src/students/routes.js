@@ -1,11 +1,20 @@
-const { Router }= require('express');
-const controller =require('./controller')
+const { Router }= require('express')
 const router = Router();
+const {
+    getStudent,
+    addStudent,
+    getStudentById,
+    removeStudent,
+    updateStudent,
+  } = require("./controller");
+  const {
+    addUserValidation
+  } = require('./userVal');
 
-router.get("/", controller.getStudent); 
-router.get("/:id", controller.getStudentById); 
+router.get("/", getStudent); 
+router.post("/",addUserValidation,addStudent);
+router.get("/:id", getStudentById); 
+router.delete("/:id", removeStudent); 
+router.put("/:id", updateStudent); 
 
-router.post("/", controller.addStudent);
-router.delete("/:id", controller.removeStudent); 
-router.put("/:id", controller.updateStudent); 
 module.exports =router;
